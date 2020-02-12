@@ -1,0 +1,14 @@
+.navigation__container {
+    ul {
+        display: flex;
+
+        li {
+            list-style-type: none;
+        }
+    }
+}
+
+.navigation--authentication__container {
+    display: flex;
+    justify-content: flex-end;
+}
