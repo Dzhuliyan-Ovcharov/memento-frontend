@@ -1,10 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/modules/shared.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UnauthenticatedModule } from './unauthenticated/modules/unauthenticated.module';
+
 
 @NgModule({
   declarations: [
@@ -13,8 +14,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     SharedModule,
-    BrowserAnimationsModule
+    UnauthenticatedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
