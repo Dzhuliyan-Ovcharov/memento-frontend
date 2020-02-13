@@ -1,29 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/shared/models/user.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { apiUrls } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
+  subscription: Subscription;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', Validators.compose([Validators.email, Validators.required])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(4)])]
     })
   }
 
-  ngOnInit(): void {
+  login(): void {
+    const user: User = this.loginForm.value;
+    this.authService.login(user)
+      .subscribe(user => {
+        this.authService.fillLocalData(user);
+        this.router.navigateByUrl(apiUrls.home);
+      });
   }
 
-  login(): User {
-    const user: User = this.loginForm.value;
-    
-    return;
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
