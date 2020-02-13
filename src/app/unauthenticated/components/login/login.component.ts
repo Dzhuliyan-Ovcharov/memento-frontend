@@ -13,6 +13,7 @@ import { apiUrls } from 'src/app/shared/constants';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
+  hidePassword: boolean = true;
   loginForm: FormGroup;
   subscription: Subscription;
 

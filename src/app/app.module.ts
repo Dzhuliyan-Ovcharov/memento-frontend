@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/modules/shared.module';
 import { UnauthenticatedModule } from './unauthenticated/modules/unauthenticated.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { UnauthenticatedModule } from './unauthenticated/modules/unauthenticated
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     SharedModule,
     UnauthenticatedModule
   ],

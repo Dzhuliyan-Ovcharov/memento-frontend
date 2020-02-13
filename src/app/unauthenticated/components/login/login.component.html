@@ -16,7 +16,11 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input type="password" formControlName="password" matInput placeholder="Парола">
+                    <input [type]="hidePassword ? 'password' : 'text'" matInput formControlName='password' placeholder="Парола">
+
+                    <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+                        {{hidePassword ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
 
                     <mat-error *ngIf="loginForm.get('password').hasError('required')">
                         Задължителна парола.
@@ -27,7 +31,8 @@
                 </mat-form-field>
 
                 <div class="button">
-                    <button type="submit" [disabled]="loginForm.invalid" mat-raised-button color="primary">Влез</button>
+                    <button type="submit" [disabled]="loginForm.invalid" mat-raised-button
+                        color="primary">Потвърди</button>
                 </div>
             </form>
         </mat-card-content>
