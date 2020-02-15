@@ -1,25 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserRegister } from 'src/app/shared/models/userRegister.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { Subscription } from 'rxjs';
+import { apiUrls } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
   hidePassword: boolean = true;
   hideConfirmPassword: boolean = true;
   registerForm: FormGroup;
+  subscription: Subscription;
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
+    private authService: AuthService,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -32,6 +35,17 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    
+    const userRegister: UserRegister = this.registerForm.value;
+    this.subscription = this.authService.register(userRegister)
+      .subscribe(() => {
+        
+        this.router.navigateByUrl(apiUrls.login);
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

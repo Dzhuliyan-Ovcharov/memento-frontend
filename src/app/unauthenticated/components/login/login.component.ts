@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login(): void {
     const user: User = this.loginForm.value;
-    this.authService.login(user)
+    this.subscription = this.authService.login(user)
       .subscribe(user => {
         this.authService.fillLocalData(user);
         this.router.navigateByUrl(apiUrls.home);

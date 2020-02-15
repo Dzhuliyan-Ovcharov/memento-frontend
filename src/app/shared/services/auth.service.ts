@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { apiUrls } from '../constants';
+import { JwtHelperService } from '../helpers/JwtHelperService';
 import { User } from '../models/user.model';
 import { UserRegister } from '../models/userRegister.model';
 
@@ -13,15 +14,12 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private jwtHelperSerice: JwtHelperService
   ) { }
 
   login(user: User): Observable<User> {
     return this.http.post<User>(apiUrls.login, user);
-  }
-
-  fillLocalData(data: any): void {
-    localStorage.setItem('token', data['token']);
   }
 
   logout(): void {
@@ -29,7 +27,23 @@ export class AuthService {
     this.router.navigateByUrl(apiUrls.home);
   }
 
-  register(userRegister: UserRegister): void {
-    this.http.post<UserRegister>(apiUrls.register, userRegister);
+  register(userRegister: UserRegister): Observable<any> {
+    return this.http.post<UserRegister>(apiUrls.register, userRegister);
+  }
+
+  fillLocalData(data: any): void {
+    localStorage.setItem('token', data['token']);
+  }
+
+  isAuthenticated(): boolean {
+    return this.jwtHelperSerice.isAuthenticated();
+  }
+
+  isAdmin(): boolean {
+    return this.jwtHelperSerice.isAdmin();
+  }
+
+  getToken(): string { 
+    return this.jwtHelperSerice.getToken();
   }
 }
