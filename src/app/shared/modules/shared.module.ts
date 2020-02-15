@@ -5,10 +5,13 @@ import { HeaderComponent } from '../components/header/header.component';
 import { MaterialModule } from './material.module';
 import { AuthService } from '../services/auth.service';
 import { JwtHelperService } from '../helpers/JwtHelperService';
+import { NotFoundComponent } from '../components/not-found/not-found.component';
+import { RoleService } from '../services/role.service';
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -17,11 +20,13 @@ import { JwtHelperService } from '../helpers/JwtHelperService';
   ],
   exports: [
     HeaderComponent,
+    NotFoundComponent,
     MaterialModule
   ],
   providers: [
     AuthService,
-    JwtHelperService
+    JwtHelperService,
+    RoleService
   ]
 })
 export class SharedModule { }
