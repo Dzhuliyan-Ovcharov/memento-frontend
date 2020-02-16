@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/shared/models/user.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { apiUrls } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription = this.authService.login(user)
       .subscribe(user => {
         this.authService.fillLocalData(user);
-        this.router.navigateByUrl(apiUrls.home);
+        this.router.navigateByUrl('/home');
       });
   }
 

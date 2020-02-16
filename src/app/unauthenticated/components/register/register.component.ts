@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { apiUrls } from 'src/app/shared/constants';
 import { UserRegister } from 'src/app/shared/models/userRegister.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { RegisterInformativeDialogComponent } from './register-informative-dialog/register-informative-dialog.component';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +25,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +39,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       email: ['', Validators.compose([Validators.email, Validators.required])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(20)])],
       confirmPassword: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(20)])],
-      roleName: [selectedValue, Validators.required]
+      permission: [selectedValue, Validators.required]
     })
   }
 
@@ -44,8 +47,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
     const userRegister: UserRegister = this.registerForm.value;
     this.subscription = this.authService.register(userRegister)
       .subscribe(() => {
-
-        this.router.navigateByUrl(apiUrls.login);
+        const dialogRef = this.dialog.open(RegisterInformativeDialogComponent, {
+          data: {
+            email: userRegister.email
+          }
+        })
+        
+        dialogRef.afterClosed().subscribe(() => this.router.navigateByUrl('/login'))
       });
   }
 

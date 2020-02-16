@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -19,7 +19,11 @@ export class AuthService {
   ) { }
 
   login(user: User): Observable<User> {
-    return this.http.post<User>(apiUrls.login, user);
+    const httpParams: HttpParams = new HttpParams()
+                                    .set('email', user.email)
+                                    .set('password', user.password)
+
+    return this.http.post<User>(`${apiUrls.login}?`, null, {params: httpParams});
   }
 
   logout(): void {
@@ -28,7 +32,7 @@ export class AuthService {
   }
 
   register(userRegister: UserRegister): Observable<any> {
-    return this.http.post<UserRegister>(apiUrls.register, userRegister);
+    return this.http.post<UserRegister>(apiUrls.users, userRegister);
   }
 
   fillLocalData(data: any): void {
@@ -43,7 +47,7 @@ export class AuthService {
     return this.jwtHelperSerice.isAdmin();
   }
 
-  getToken(): string { 
+  getToken(): string {
     return this.jwtHelperSerice.getToken();
   }
 }
