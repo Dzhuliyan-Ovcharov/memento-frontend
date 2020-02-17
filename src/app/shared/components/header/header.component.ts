@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { JwtHelperService } from 'src/app/core/services/jwt-helper.service';
 
 @Component({
