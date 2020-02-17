@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { apiUrls } from 'src/app/shared/constants';
-import { UserRegister } from 'src/app/shared/models/userRegister.model';
-import { AuthService } from 'src/app/shared/services/auth.service';
 import { RegisterInformativeDialogComponent } from './register-informative-dialog/register-informative-dialog.component';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { UserRegister } from 'src/app/data/models/userRegister.model';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-register',
@@ -26,7 +26,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -45,8 +46,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   register(): void {
     const userRegister: UserRegister = this.registerForm.value;
+
+    this.spinner.show();
     this.subscription = this.authService.register(userRegister)
       .subscribe(() => {
+        this.spinner.hide();
         const dialogRef = this.dialog.open(RegisterInformativeDialogComponent, {
           data: {
             email: userRegister.email

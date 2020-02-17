@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { apiUrls } from '../constants';
-import { Role } from '../models/role.model';
+import { Role } from 'src/app/data/models/role.model';
+import { apiUrls } from 'src/app/shared/constants';
 
 @Injectable({
   providedIn: 'root'

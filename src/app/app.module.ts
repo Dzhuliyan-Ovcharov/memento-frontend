@@ -4,9 +4,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/modules/shared.module';
-import { UnauthenticatedModule } from './unauthenticated/modules/unauthenticated.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtHeaderInterceptor } from './shared/interceptors/jwt-header.interceptor';
+import { PageModule } from './pages/page.module';
+import { JwtHeaderInterceptor } from './core/interceptors/jwt-header.interceptor';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { JwtHeaderInterceptor } from './shared/interceptors/jwt-header.intercept
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,
-    UnauthenticatedModule
+    PageModule
   ],
   providers: [
     {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { RoleService } from '../services/role.service';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { RoleService } from 'src/app/core/services/role.service';
 
 @Injectable({
     providedIn: 'root'

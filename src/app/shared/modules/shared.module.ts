@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '../components/header/header.component';
 import { MaterialModule } from './material.module';
-import { AuthService } from '../services/auth.service';
 import { JwtHelperService } from '../helpers/JwtHelperService';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
-import { RoleService } from '../services/role.service';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { RoleService } from 'src/app/core/services/role.service';
+import { EmailVerificationService } from 'src/app/core/services/email-verification.service';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,14 @@ import { RoleService } from '../services/role.service';
   exports: [
     HeaderComponent,
     NotFoundComponent,
-    MaterialModule
+    MaterialModule,
+    RouterModule
   ],
   providers: [
     AuthService,
     JwtHelperService,
-    RoleService
+    RoleService,
+    EmailVerificationService
   ]
 })
 export class SharedModule { }
