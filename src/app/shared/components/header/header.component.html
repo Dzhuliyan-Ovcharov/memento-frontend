@@ -8,15 +8,24 @@
                 <a mat-button routerLink="/estates">Имоти</a>
             </li>
             
-            <div class="navigation--authentication__container">
+
+            <div *ngIf="isLoggedIn(); then logged else notLogged" class="navigation--authentication__container">
+            </div>
+        
+            <ng-template #notLogged>
                 <li>
                     <a mat-button routerLink="/login">Влез</a>
                 </li>
                 <li>
                     <a mat-button routerLink="/register">Регистрация</a>
                 </li>
-            </div>
-        
+            </ng-template>
+
+            <ng-template #logged>
+                <li>
+                    <a mat-button routerLink="/logout">Излез</a>
+                </li>
+            </ng-template>
         </ul>
     </nav>
 </mat-toolbar>

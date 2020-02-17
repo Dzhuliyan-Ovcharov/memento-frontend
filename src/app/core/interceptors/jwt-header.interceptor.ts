@@ -1,17 +1,17 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service';
+import { JwtHelperService } from '../services/jwt-helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JwtHeaderInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService) {}
+  constructor(private jwtHelperService: JwtHelperService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token: string = this.authService.getToken();
+    const token: string = this.jwtHelperService.getToken();
     const jsonRequest: HttpRequest<any> = request.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`,

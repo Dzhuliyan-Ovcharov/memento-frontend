@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
+import { JwtHelperService } from 'src/app/core/services/jwt-helper.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  constructor() { }
+  constructor(private jwtHelperService: JwtHelperService) { }
 
-  ngOnInit(): void {
+  isLoggedIn(): boolean {
+    return this.jwtHelperService.isAuthenticated();
   }
 
 }

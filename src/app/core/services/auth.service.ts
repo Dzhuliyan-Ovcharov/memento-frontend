@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/data/models/user.model';
 import { UserRegister } from 'src/app/data/models/userRegister.model';
-import { JwtHelperService } from 'src/app/shared/helpers/JwtHelperService';
 import { apiUrls } from 'src/app/shared/constants';
 
 @Injectable({
@@ -14,8 +13,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router,
-    private jwtHelperSerice: JwtHelperService
+    private router: Router
   ) { }
 
   login(user: User): Observable<User> {
@@ -31,19 +29,7 @@ export class AuthService {
     return this.http.post<UserRegister>(apiUrls.users, userRegister);
   }
 
-  fillLocalData(token: any): void {
+  fillLocalData(token: string): void {
     localStorage.setItem('token', token);
-  }
-
-  isAuthenticated(): boolean {
-    return this.jwtHelperSerice.isAuthenticated();
-  }
-
-  isAdmin(): boolean {
-    return this.jwtHelperSerice.isAdmin();
-  }
-
-  getToken(): string {
-    return this.jwtHelperSerice.getToken();
   }
 }
