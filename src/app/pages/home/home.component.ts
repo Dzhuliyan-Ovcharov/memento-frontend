@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  imagePaths: string[] = [
+    'assets/images/slide-one.jpg',
+    'assets/images/slide-two.jpg',
+    'assets/images/slide-three.jpg'
+  ];
+
   constructor() { }
 
   ngOnInit(): void {

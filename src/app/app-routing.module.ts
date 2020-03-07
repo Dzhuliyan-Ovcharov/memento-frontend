@@ -7,6 +7,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { EmailVerificationComponent } from './pages/login/email-verification/email-verification.component';
 import { EmailVerificationResolver } from './data/services/email.verification.resolver';
 import { RoleResolver } from './data/services/role.resolver';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,14 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     resolve: { roles: RoleResolver }
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
+  },
+  {
+    path: 'estates',
+    loadChildren: () => import('./pages/estate/estate.module').then(m => m.EstateModule)
   },
   {
     path: '**',

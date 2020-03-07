@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
     <nav class="navigation__container">
         <ul>
             <li>
@@ -23,7 +23,7 @@
 
             <ng-template #logged>
                 <li>
-                    <a mat-button routerLink="/logout">Излез</a>
+                    <a mat-button routerLink="/logout" (click)="logout()">Излез</a>
                 </li>
             </ng-template>
         </ul>

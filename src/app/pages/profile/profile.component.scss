@@ -1,0 +1,12 @@
+@import '_variables';
+
+.container__profile {
+    margin: 0 auto;
+}
+
+.mat-toolbar-tools {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: $black;
+ }

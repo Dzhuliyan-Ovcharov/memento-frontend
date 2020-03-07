@@ -9,6 +9,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: $white;
 }
 
+.snack-error {
+  background: #B00020;
+}
+
 .container,
 .container--card {
   display: flex;

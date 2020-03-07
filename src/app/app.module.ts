@@ -7,6 +7,7 @@ import { SharedModule } from './shared/modules/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PageModule } from './pages/page.module';
 import { JwtHeaderInterceptor } from './core/interceptors/jwt-header.interceptor';
+import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,11 @@ import { JwtHeaderInterceptor } from './core/interceptors/jwt-header.interceptor
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtHeaderInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
       multi: true
     }
   ],
