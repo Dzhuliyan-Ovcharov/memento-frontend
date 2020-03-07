@@ -12,11 +12,11 @@ export class RoleResolver implements Resolve<any> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         return this.roleService.getRoles()
-        .pipe(
-            map((role: string[]) => {
-                return role.map((role: string) => role)
-                .filter(role => role != 'ADMIN')
-            })
-        );
+            .pipe(
+                map((role: string[]) => {
+                    return role.map((role: string) => role)
+                        .filter(role => role != 'ADMIN')
+                })
+            );
     }
 }

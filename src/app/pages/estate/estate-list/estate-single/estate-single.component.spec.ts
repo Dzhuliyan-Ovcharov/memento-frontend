@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { EstateSingleComponent } from './estate-single.component';
 
-import { EstatesComponent } from './estates.component';
 
-describe('EstatesComponent', () => {
-  let component: EstatesComponent;
-  let fixture: ComponentFixture<EstatesComponent>;
+describe('EstateSingleComponent', () => {
+  let component: EstateSingleComponent;
+  let fixture: ComponentFixture<EstateSingleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EstatesComponent ]
+      declarations: [ EstateSingleComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EstatesComponent);
+    fixture = TestBed.createComponent(EstateSingleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,13 +1,14 @@
-import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { EstatesComponent } from './estates/estates.component';
+import { RouterModule, Routes } from '@angular/router';
+import { EstateCreateResolver } from 'src/app/data/services/estate-create.resolver';
+import { EstateListComponent } from './estate-list/estate-list.component';
+import { EstateDetailsComponent } from './estate-list/estate-single/estate-details/estate-details.component';
 import { EstateCreateComponent } from './estate-create/estate-create.component';
-import { EstateDetailsComponent } from './estates/single-estate/estate-details/estate-details.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: EstatesComponent
+        component: EstateListComponent
     },
     {
         path: ':estateId',
@@ -15,7 +16,8 @@ const routes: Routes = [
     },
     {
         path: 'create',
-        component: EstateCreateComponent
+        component: EstateCreateComponent,
+        resolve: { data: EstateCreateResolver }
     }
 ];
 

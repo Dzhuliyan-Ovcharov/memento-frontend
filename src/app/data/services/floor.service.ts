@@ -20,6 +20,6 @@ export class FloorService {
   }
 
   findByNumber(number: number): Observable<Floor> {
-    return this.http.get<Floor>(`${apiUrls.floors}/number/` + number)
+    return this.http.get<Floor>(`${apiUrls.floors}/number/${number}`)
   }
 }
