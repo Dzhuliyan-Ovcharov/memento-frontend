@@ -1,31 +1,45 @@
-<mat-toolbar color="primary">
-    <nav class="navigation__container">
-        <ul>
-            <li>
-                <a mat-button routerLink="/home">Начало</a>
-            </li>
-            <li>
-                <a mat-button routerLink="/estates">Имоти</a>
-            </li>
-            
+<header>
+    <mat-toolbar color="primary">
+        <nav class="navigation__container">
+            <ul>
+                <li>
+                    <a mat-button routerLink="/home">Начало</a>
+                </li>
+                <li>
+                    <a mat-button routerLink="/estates">Имоти</a>
+                </li>
 
-            <div *ngIf="isLoggedIn(); then logged else notLogged" class="navigation--authentication__container">
-            </div>
-        
-            <ng-template #notLogged>
-                <li>
-                    <a mat-button routerLink="/login">Влез</a>
-                </li>
-                <li>
-                    <a mat-button routerLink="/register">Регистрация</a>
-                </li>
-            </ng-template>
 
-            <ng-template #logged>
-                <li>
-                    <a mat-button routerLink="/logout" (click)="logout()">Излез</a>
-                </li>
-            </ng-template>
-        </ul>
-    </nav>
-</mat-toolbar>
+                <div *ngIf="isLoggedIn(); then logged else notLogged" class="navigation--authentication__container">
+                </div>
+
+                <ng-template #notLogged>
+                    <li>
+                        <a mat-button routerLink="/login">Влез</a>
+                    </li>
+                    <li>
+                        <a mat-button routerLink="/register">Регистрация</a>
+                    </li>
+                </ng-template>
+
+                
+                <ng-template #logged>
+                    <div class="primary-nav">
+                        <button mat-button [matMenuTriggerFor]="menu">
+                            <mat-icon aria-hidden="false" aria-label="Avatar icon">
+                                account_circle
+                            </mat-icon>
+                            <span class="primary-nav__user-name">
+                               
+                            </span>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <a mat-menu-item routerLink="/profile">Профил</a>
+                            <a mat-button routerLink="/logout" (click)="logout()">Излез</a>
+                        </mat-menu>
+                    </div>
+                </ng-template>
+            </ul>
+        </nav>
+    </mat-toolbar>
+</header>

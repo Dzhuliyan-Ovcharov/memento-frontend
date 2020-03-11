@@ -1,1 +1,68 @@
-<p>estate-create works!</p>
+<form [formGroup]="estateForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <input type="number" formControlName="builtUpArea" matInput placeholder="Квадрати">
+
+        <mat-icon matSuffix>square_foot</mat-icon>
+
+        <mat-error *ngFor="let error of estateForm.controls.firstName.errors | error">
+            {{ error }}
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="number" formControlName="pureArea" matInput placeholder="Чисти квадрати">
+
+        <mat-icon matSuffix>square_foot</mat-icon>
+
+        <mat-error *ngFor="let error of estateForm.controls.firstName.errors | error">
+            {{ error }}
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="number" formControlName="price" matInput placeholder="Цена">
+
+        <mat-icon matSuffix>attach_money</mat-icon>
+
+        <mat-error *ngFor="let error of estateForm.controls.firstName.errors | error">
+            {{ error }}
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select formControlName='floors'>
+            <mat-option *ngFor="let floor of floors" [value]='floor'>
+                {{floor | uppercase}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select formControlName='estateType'>
+            <mat-option *ngFor="let estateType of estateTypes" [value]='estateType'>
+                {{estateType | uppercase}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select formControlName='adType'>
+            <mat-option *ngFor="let adType of adTypes" [value]='adType'>
+                {{adType | uppercase}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="text" formControlName="description" matInput placeholder="Описание">
+
+        <mat-icon matSuffix>description</mat-icon>
+
+        <mat-error *ngFor="let error of estateForm.controls.firstName.errors | error">
+            {{ error }}
+        </mat-error>
+    </mat-form-field>
+
+
+
+</form>

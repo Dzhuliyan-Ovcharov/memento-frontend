@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/modules/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PageModule } from './pages/page.module';
 import { JwtHeaderInterceptor } from './core/interceptors/jwt-header.interceptor';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [

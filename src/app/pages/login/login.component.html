@@ -7,26 +7,22 @@
                     <input type="email" formControlName="email" matInput placeholder="Имейл">
 
                     <mat-icon matSuffix>email</mat-icon>
-                    <mat-error *ngIf="loginForm.get('email').hasError('required')">
-                        Задължителен имейл. 
-                    </mat-error>
-                    <mat-error *ngIf="loginForm.get('email').hasError('email')">
-                        Невалиден имейл.
+
+                    <mat-error *ngFor="let error of loginForm.controls.email.errors | error">
+                        {{ error }}
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input [type]="hidePassword ? 'password' : 'text'" matInput formControlName='password' placeholder="Парола">
+                    <input [type]="hidePassword ? 'password' : 'text'" matInput formControlName='password'
+                        placeholder="Парола">
 
                     <mat-icon matSuffix (click)="hidePassword = !hidePassword">
                         {{hidePassword ? 'visibility_off' : 'visibility'}}
                     </mat-icon>
 
-                    <mat-error *ngIf="loginForm.get('password').hasError('required')">
-                        Задължителна парола.
-                    </mat-error>
-                    <mat-error *ngIf="loginForm.get('password').hasError('minlength')">
-                        Моля добавете поне 4 символа.
+                    <mat-error *ngFor="let error of loginForm.controls.password.errors | error">
+                        {{ error }}
                     </mat-error>
                 </mat-form-field>
 
@@ -34,6 +30,7 @@
                     <button type="submit" [disabled]="loginForm.invalid" mat-raised-button
                         color="primary">Потвърди</button>
                 </div>
+
             </form>
         </mat-card-content>
     </mat-card>

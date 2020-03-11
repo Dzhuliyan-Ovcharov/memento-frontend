@@ -17,7 +17,7 @@ const routes: Routes = [
     {
         path: 'create',
         component: EstateCreateComponent,
-        resolve: { data: EstateCreateResolver }
+        resolve: { estateCreateData: EstateCreateResolver }
     }
 ];
 

@@ -12,3 +12,14 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.mat-toolbar.mat-primary {
+    display: flex;
+
+    .primary-nav {
+        &__user-name {
+            margin-left: 5px;
+            font-weight: 400;
+        }
+    }
+}

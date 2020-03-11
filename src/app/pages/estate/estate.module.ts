@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { EstateCreateComponent } from './estate-create/estate-create.component';
-import { EstateRoutingModule } from './estate-routing.module';
-import { EstateSingleComponent } from './estate-list/estate-single/estate-single.component';
-import { EstateDetailsComponent } from './estate-list/estate-single/estate-details/estate-details.component';
 import { EstateListComponent } from './estate-list/estate-list.component';
+import { EstateDetailsComponent } from './estate-list/estate-single/estate-details/estate-details.component';
+import { EstateSingleComponent } from './estate-list/estate-single/estate-single.component';
+import { EstateRoutingModule } from './estate-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { EstateListComponent } from './estate-list/estate-list.component';
   ],
   imports: [
     CommonModule,
-    EstateRoutingModule
+    EstateRoutingModule,
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class EstateModule { }

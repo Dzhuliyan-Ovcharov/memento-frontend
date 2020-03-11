@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
 import { Subscription } from 'rxjs';
-import { RegisterInformativeDialogComponent } from './register-informative-dialog/register-informative-dialog.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserRegister } from 'src/app/data/models/userRegister.model';
-import { NgxSpinnerService } from "ngx-spinner";
+import { RegisterInformativeDialogComponent } from './register-informative-dialog/register-informative-dialog.component';
 
 @Component({
   selector: 'app-register',
@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       password: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(20)])],
       confirmPassword: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(20)])],
       permission: [selectedValue, Validators.required]
-    })
+    });
   }
 
   register(): void {
@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
             email: userRegister.email
           }
         })
-        
+
         dialogRef.afterClosed().subscribe(() => this.router.navigateByUrl('/login'))
       });
   }

@@ -8,12 +8,8 @@
 
                     <mat-icon matSuffix>face</mat-icon>
 
-                    <mat-error *ngIf="registerForm.get('firstName').hasError('required')">
-                        Задължително поле.
-                    </mat-error>
-
-                    <mat-error *ngIf="registerForm.get('firstName').hasError('minlength')">
-                        Моля въведете минимум 3 символа.
+                    <mat-error *ngFor="let error of registerForm.controls.firstName.errors | error">
+                        {{ error }}
                     </mat-error>
                 </mat-form-field>
 
@@ -22,12 +18,8 @@
 
                     <mat-icon matSuffix>create</mat-icon>
 
-                    <mat-error *ngIf="registerForm.get('lastName').hasError('required')">
-                        Задължително поле.
-                    </mat-error>
-
-                    <mat-error *ngIf="registerForm.get('lastName').hasError('minlength')">
-                        Моля въведете минимум 3 символа.
+                    <mat-error *ngFor="let error of registerForm.controls.lastName.errors | error">
+                        {{ error }}
                     </mat-error>
                 </mat-form-field>
 
@@ -37,12 +29,8 @@
 
                     <mat-icon matSuffix>email</mat-icon>
 
-                    <mat-error *ngIf="registerForm.get('email').hasError('required')">
-                        Задължително поле.
-                    </mat-error>
-
-                    <mat-error *ngIf="registerForm.get('email').hasError('email')">
-                        Моля въведете валиден имейл.
+                    <mat-error *ngFor="let error of registerForm.controls.email.errors | error">
+                        {{ error }}
                     </mat-error>
                 </mat-form-field>
 
@@ -54,16 +42,8 @@
                         {{hidePassword ? 'visibility_off' : 'visibility'}}
                     </mat-icon>
 
-                    <mat-error *ngIf="registerForm.get('password').hasError('required')">
-                        Задължително поле.
-                    </mat-error>
-
-                    <mat-error *ngIf="registerForm.get('password').hasError('minlength')">
-                        Моля добавете най-малко 8 символа.
-                    </mat-error>
-
-                    <mat-error *ngIf="registerForm.get('password').hasError('maxlength')">
-                        Моля добавете най-малко 20 символа.
+                    <mat-error *ngFor="let error of registerForm.controls.password.errors | error">
+                        {{ error }}
                     </mat-error>
                 </mat-form-field>
 
@@ -75,16 +55,8 @@
                         {{hideConfirmPassword ? 'visibility_off' : 'visibility'}}
                     </mat-icon>
 
-                    <mat-error *ngIf="registerForm.get('password').hasError('required')">
-                        Задължително поле.
-                    </mat-error>
-
-                    <mat-error *ngIf="registerForm.get('password').hasError('minlength')">
-                        Моля добавете най-малко 8 символа.
-                    </mat-error>
-
-                    <mat-error *ngIf="registerForm.get('password').hasError('maxlength')">
-                        Моля добавете най-малко 20 символа.
+                    <mat-error *ngFor="let error of registerForm.controls.confirmPassword.errors | error">
+                        {{ error }}
                     </mat-error>
                 </mat-form-field>
 
