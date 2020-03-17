@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/data/models/user.model';
-import { UserRegister } from 'src/app/data/models/userRegister.model';
+import { UserRegister } from 'src/app/data/models/user-register.model';
 import { apiUrls } from 'src/app/shared/constants';
 
 @Injectable({

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { EmailVerificationComponent } from './login/email-verification/email-verification.component';
 import { LoginComponent } from './login/login.component';
@@ -23,7 +22,7 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    FormsModule 
   ],
   exports: [
     LoginComponent,

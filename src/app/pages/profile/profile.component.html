@@ -1,4 +1,4 @@
-<div class="container__profile">
+<!--<div class="container__profile">
     <mat-toolbar>
         <div class="mat-toolbar-tools">
             <h3>
@@ -31,3 +31,29 @@
         </mat-tab>
     </mat-tab-group>
 </div>
+-->
+<section class="container">
+    <mat-card class="profile-container">
+        <h1 class="profile-container__heading">Твоят профил</h1>
+        <mat-card-content>
+
+            <form #profileForm="ngForm" *ngIf="(userProfile$ | async) as userProfile">
+                <mat-form-field class="profile-form-field" floatLabel="always" hideRequiredMarker="true">
+                    <mat-label>Име</mat-label>
+                    <input matInput class="form-control" id="firstName" readonly type="text" name="firstName"
+                        [value]="userProfile.firstName" />
+                </mat-form-field>
+                <mat-form-field class="profile-form-field" floatLabel="always" hideRequiredMarker="true">
+                    <mat-label>Фамилия</mat-label>
+                    <input matInput class="form-control" id="lastName" readonly type="text" name="lastName"
+                        [value]="userProfile.lastName" />
+                </mat-form-field>
+                <mat-form-field class="profile-form-field" floatLabel="always" hideRequiredMarker="true">
+                    <mat-label>Емайл</mat-label>
+                    <input matInput class="form-control" id="email" readonly type="text" name="email"
+                        [value]="userProfile.email" />
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</section>

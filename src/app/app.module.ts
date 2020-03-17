@@ -8,6 +8,7 @@ import { PageModule } from './pages/page.module';
 import { JwtHeaderInterceptor } from './core/interceptors/jwt-header.interceptor';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
 import { SharedModule } from './shared/shared.module';
+import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,11 @@ import { SharedModule } from './shared/shared.module';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
       multi: true
     }
   ],

@@ -1,12 +1,56 @@
 @import '_variables';
 
-.container__profile {
-    margin: 0 auto;
+.profile-container {
+    min-height: 35rem;
+    padding: 5rem 6rem;
+
+    &__heading {
+        color: #0071bb;
+        font-size: 4.3rem;
+        margin-bottom: 4rem;
+
+        @media screen and (max-width: 576px) {
+            margin-bottom: 3rem;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        padding: 3rem;
+    }
 }
 
-.mat-toolbar-tools {
+form {
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    color: $black;
- }
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .profile-form-field {
+        flex: 48% 0 1;
+
+        input {
+            cursor: default;
+        }
+
+        @media screen and (max-width: 576px) {
+            flex-basis: 100%;
+        }
+    }
+
+    .action-holder {
+        margin-top: 2.5rem;
+
+        button {
+            margin-right: 1rem;
+        }
+
+        @media screen and (max-width: 576px) {
+            display: flex;
+            justify-content: space-between;
+
+            button {
+                margin-right: 0;
+                flex: 45% 0 1;
+            }
+        }
+    }
+}

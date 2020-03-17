@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { JwtHelperService } from 'src/app/core/services/jwt-helper.service';
+import { UserService } from 'src/app/core/services/user.service';
+import { UserProfile } from 'src/app/data/models/user-profile.model';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  userProfile$: Observable<UserProfile>;
 
-  ngOnInit(): void {
+  constructor(
+    private userService: UserService,
+    private jwtHelperService: JwtHelperService
+  ) {
   }
 
+  ngOnInit(): void {
+    this.userProfile$ = this.userService.getUserProfileByEmail(this.jwtHelperService.getEmail());
+  }
 }

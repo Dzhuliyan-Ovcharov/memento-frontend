@@ -10,18 +10,22 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { MaterialModule } from './modules/material.module';
 import { ErrorPipe } from './pipes/error.pipe';
 import { FooterComponent } from './components/footer/footer.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
     HeaderComponent,
     NotFoundComponent,
     ErrorPipe,
-    FooterComponent
+    FooterComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule,
+    NgxSpinnerModule
   ],
   exports: [
     HeaderComponent,
@@ -29,7 +33,9 @@ import { FooterComponent } from './components/footer/footer.component';
     MaterialModule,
     RouterModule,
     ErrorPipe,
-    FooterComponent
+    FooterComponent,
+    NgxSpinnerModule,
+    SpinnerComponent
   ],
   providers: [
     AuthService,

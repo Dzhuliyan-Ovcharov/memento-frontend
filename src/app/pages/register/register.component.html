@@ -1,82 +1,109 @@
 <div class="container">
     <mat-card class="container--card">
         <mat-card-title>Регистрация</mat-card-title>
-        <mat-card-content>
-            <form [formGroup]="registerForm" (ngSubmit)="register()">
-                <mat-form-field>
-                    <input type="text" formControlName="firstName" matInput placeholder="Име">
+        <mat-horizontal-stepper [linear]="true" #stepper>
+            <mat-step [stepControl]="stepOneRegisterForm">
+                <form [formGroup]="stepOneRegisterForm">
+                    <ng-template matStepLabel>Данни за брокер</ng-template>
+                    <mat-form-field>
+                        <input type="text" formControlName="firstName" matInput placeholder="Име">
+                        <mat-icon matSuffix>face</mat-icon>
+                        <mat-error *ngFor="let error of stepOneRegisterForm.controls.firstName.errors | error">
+                            {{ error }}
+                        </mat-error>
+                    </mat-form-field>
 
-                    <mat-icon matSuffix>face</mat-icon>
+                    <mat-form-field>
+                        <input type="text" formControlName="lastName" matInput placeholder="Фамилия">
+                        <mat-icon matSuffix>create</mat-icon>
+                        <mat-error *ngFor="let error of stepOneRegisterForm.controls.lastName.errors | error">
+                            {{ error }}
+                        </mat-error>
+                    </mat-form-field>
 
-                    <mat-error *ngFor="let error of registerForm.controls.firstName.errors | error">
-                        {{ error }}
-                    </mat-error>
-                </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" formControlName="email" matInput placeholder="Имейл">
+                        <mat-icon matSuffix>email</mat-icon>
+                        <mat-error *ngFor="let error of stepOneRegisterForm.controls.email.errors | error">
+                            {{ error }}
+                        </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field>
-                    <input type="text" formControlName="lastName" matInput placeholder="Фамилия">
+                    <mat-form-field>
+                        <input type="tel" formControlName="phoneNumber" matInput placeholder="Номер на брокер">
+                        <mat-icon matSuffix>smartphone</mat-icon>
+                        <mat-error *ngFor="let error of stepOneRegisterForm.controls.phoneNumber.errors | error">
+                            {{ error }}
+                        </mat-error>
+                    </mat-form-field>
 
-                    <mat-icon matSuffix>create</mat-icon>
+                    <div>
+                        <button [disabled]="stepOneRegisterForm.invalid" matStepperNext mat-raised-button
+                            color="primary">Напред</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="stepTwoRegisterForm">
+                <form [formGroup]="stepTwoRegisterForm">
+                    <ng-template matStepLabel>Данни за агенция</ng-template>
+                    <mat-form-field>
+                        <input type="text" formControlName="agencyName" matInput placeholder="Име на агенция">
+                        <mat-icon matSuffix>store</mat-icon>
+                        <mat-error *ngFor="let error of stepTwoRegisterForm.controls.agencyName.errors | error">
+                            {{ error }}
+                        </mat-error>
+                    </mat-form-field>
 
-                    <mat-error *ngFor="let error of registerForm.controls.lastName.errors | error">
-                        {{ error }}
-                    </mat-error>
-                </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" formControlName="agencyPhoneNumber" matInput placeholder="Номер на агенция">
+                        <mat-icon matSuffix>smartphone</mat-icon>
+                        <mat-error *ngFor="let error of stepTwoRegisterForm.controls.agencyPhoneNumber.errors | error">
+                            {{ error }}
+                        </mat-error>
+                    </mat-form-field>
 
+                    <mat-form-field>
+                        <input [type]="hidePassword ? 'password' : 'text'" matInput formControlName='password'
+                            placeholder="Парола">
+                        <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+                            {{hidePassword ? 'visibility_off' : 'visibility'}}
+                        </mat-icon>
+                        <mat-error *ngFor="let error of stepTwoRegisterForm.controls.password.errors | error">
+                            {{ error }}
+                        </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field>
-                    <input type="text" formControlName="email" matInput placeholder="Имейл">
-
-                    <mat-icon matSuffix>email</mat-icon>
-
-                    <mat-error *ngFor="let error of registerForm.controls.email.errors | error">
-                        {{ error }}
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field>
-                    <input [type]="hidePassword ? 'password' : 'text'" matInput formControlName='password'
-                        placeholder="Парола">
-
-                    <mat-icon matSuffix (click)="hidePassword = !hidePassword">
-                        {{hidePassword ? 'visibility_off' : 'visibility'}}
-                    </mat-icon>
-
-                    <mat-error *ngFor="let error of registerForm.controls.password.errors | error">
-                        {{ error }}
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field>
-                    <input [type]="hideConfirmPassword ? 'password' : 'text'" matInput formControlName='confirmPassword'
-                        placeholder="Повторна парола">
-
-                    <mat-icon matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">
-                        {{hideConfirmPassword ? 'visibility_off' : 'visibility'}}
-                    </mat-icon>
-
-                    <mat-error *ngFor="let error of registerForm.controls.confirmPassword.errors | error">
-                        {{ error }}
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field>
-                    <mat-select formControlName='permission'>
-                        <mat-option *ngFor="let role of roles" [value]='role'>
-                            {{role | uppercase}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <div class="button">
-                    <button type="submit" [disabled]="registerForm.invalid" mat-raised-button color="primary">
-                        Потвърди
-                    </button>
-                </div>
-            </form>
-        </mat-card-content>
+                    <mat-form-field>
+                        <input [type]="hideConfirmPassword ? 'password' : 'text'" matInput
+                            formControlName='confirmPassword' placeholder="Повторна парола">
+                        <mat-icon matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">
+                            {{hideConfirmPassword ? 'visibility_off' : 'visibility'}}
+                        </mat-icon>
+                        <mat-error *ngFor="let error of stepTwoRegisterForm.controls.confirmPassword.errors | error">
+                            {{ error }}
+                        </mat-error>
+                    </mat-form-field>
+                    <div>
+                        <button [disabled]="stepOneRegisterForm.invalid" matStepperPrevious mat-raised-button
+                            color="primary">Назад</button>
+                        <button [disabled]="stepTwoRegisterForm.invalid" matStepperNext mat-raised-button
+                            color="primary">Напред</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step>
+                <form (ngSubmit)="register()">
+                    <ng-template matStepLabel>Готово</ng-template>
+                    <h1>Натиснете бутона Потвърди, за да продължите към вашата регистрация.</h1>
+                    <div>
+                        <button [disabled]="stepTwoRegisterForm.invalid" matStepperPrevious mat-raised-button
+                            color="primary">Назад</button>
+                        <button type="submit" mat-raised-button color="primary">Потвърди</button>
+                    </div>
+                </form>
+            </mat-step>
+        </mat-horizontal-stepper>
     </mat-card>
 </div>
 
-<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
-    <p style="color: white">Зареждане...</p>
-</ngx-spinner>
+<app-spinner></app-spinner>

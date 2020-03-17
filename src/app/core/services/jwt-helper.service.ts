@@ -10,6 +10,21 @@ export class JwtHelperService {
         return localStorage.getItem('token');
     }
 
+    getFirstName(): string {
+        const token: any = jwt_decode(this.getToken());
+        return token.firstName;
+    }
+
+    getLastName(): string {
+        const token: any = jwt_decode(this.getToken());
+        return token.lastName;
+    }
+
+    getEmail(): string {
+        const token: any = jwt_decode(this.getToken());
+        return token.sub;
+    }
+
     isAuthenticated(): boolean {
         return this.isTokenExists(this.getToken());
     }
