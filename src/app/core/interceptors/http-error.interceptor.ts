@@ -16,12 +16,13 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       .pipe(
         catchError((error: HttpErrorResponse) => {
           let errorMessage = '';
+          console.log(error);
           if (error.error instanceof ErrorEvent) {
             // client error
-            errorMessage = `Грешка: ${error.error.message}`;
+            errorMessage = `Грешка: ${error.error}`;
           } else {
             // server error
-            errorMessage = `Грешка статус: ${error.status}\n Съобщение: ${error.message}`;
+            errorMessage = `Грешка статус: ${error.status}\n Съобщение: ${error.error}`;
           }
 
           this.snackBar.open(errorMessage, "Потвърди", {

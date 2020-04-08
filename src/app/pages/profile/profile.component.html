@@ -1,59 +1,54 @@
-<!--<div class="container__profile">
-    <mat-toolbar>
-        <div class="mat-toolbar-tools">
-            <h3>
-                <span>Профил</span>
-            </h3>
-        </div>
-    </mat-toolbar>
-    <mat-tab-group>
-        <mat-tab label="Информация">
-            <br>
-            <mat-form-field>
-                <mat-icon matSuffix>face</mat-icon>
-                <input type="text" matInput placeholder="Име">
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-                <mat-icon matSuffix>create</mat-icon>
-                <input type="text" matInput placeholder="Фамилия">
-            </mat-form-field>
-            <br>
-            
-            <mat-form-field>
-                <mat-icon matSuffix>email</mat-icon>
-                <input type="email" matInput placeholder="Имейл" readonly>
-            </mat-form-field>
-
-
+<mat-card class="profile-container">
+    <h1 class="profile-container__heading">Твоят профил</h1>
+    <mat-tab-group *ngIf="(userProfile$ | async) as userProfile">
+        <mat-tab label="Лични данни">
+            <mat-card-content class="profile-container__body">
+                <form #profileForm="ngForm">
+                    <mat-form-field class="profile-form-field" floatLabel="always" hideRequiredMarker="true">
+                        <mat-label>Име</mat-label>
+                        <input matInput class="form-control" id="firstName" readonly type="text" name="firstName"
+                            [value]="userProfile.firstName" />
+                    </mat-form-field>
+                    <mat-form-field class="profile-form-field" floatLabel="always" hideRequiredMarker="true">
+                        <mat-label>Фамилия</mat-label>
+                        <input matInput class="form-control" id="lastName" readonly type="text" name="lastName"
+                            [value]="userProfile.lastName" />
+                    </mat-form-field>
+                    <mat-form-field class="profile-form-field" floatLabel="always" hideRequiredMarker="true">
+                        <mat-label>Имейл</mat-label>
+                        <input matInput class="form-control" id="email" readonly type="text" name="email"
+                            [value]="userProfile.email" />
+                    </mat-form-field>
+                    <mat-form-field class="profile-form-field" floatLabel="always" hideRequiredMarker="true">
+                        <mat-label>Телефон</mat-label>
+                        <input matInput class="form-control" id="phoneNUmber" readonly type="tel" name="phoneNumber"
+                            [value]="userProfile.phoneNumber" />
+                    </mat-form-field>
+                </form>
+            </mat-card-content>
+        </mat-tab>
+        <mat-tab label="Данни за агенция">
+            <mat-card-content class="profile-container__body">
+                <form #profileForm="ngForm">
+                    <mat-form-field class="profile-form-field" floatLabel="always" hideRequiredMarker="true">
+                        <mat-label>Име на агенция</mat-label>
+                        <input matInput class="form-control" id="agencyName" readonly type="text" name="agencyName"
+                            [value]="userProfile.agencyName" />
+                    </mat-form-field>
+                    <mat-form-field class="profile-form-field" floatLabel="always" hideRequiredMarker="true">
+                        <mat-label>Телефон</mat-label>
+                        <input matInput class="form-control" id="agencyPhoneNumber" readonly type="text"
+                            name="agencyPhoneNumber" [value]="userProfile.agencyPhoneNumber" />
+                    </mat-form-field>
+                </form>
+            </mat-card-content>
         </mat-tab>
         <mat-tab label="Сигурност">
+
         </mat-tab>
     </mat-tab-group>
-</div>
--->
-<section class="container">
-    <mat-card class="profile-container">
-        <h1 class="profile-container__heading">Твоят профил</h1>
-        <mat-card-content>
 
-            <form #profileForm="ngForm" *ngIf="(userProfile$ | async) as userProfile">
-                <mat-form-field class="profile-form-field" floatLabel="always" hideRequiredMarker="true">
-                    <mat-label>Име</mat-label>
-                    <input matInput class="form-control" id="firstName" readonly type="text" name="firstName"
-                        [value]="userProfile.firstName" />
-                </mat-form-field>
-                <mat-form-field class="profile-form-field" floatLabel="always" hideRequiredMarker="true">
-                    <mat-label>Фамилия</mat-label>
-                    <input matInput class="form-control" id="lastName" readonly type="text" name="lastName"
-                        [value]="userProfile.lastName" />
-                </mat-form-field>
-                <mat-form-field class="profile-form-field" floatLabel="always" hideRequiredMarker="true">
-                    <mat-label>Емайл</mat-label>
-                    <input matInput class="form-control" id="email" readonly type="text" name="email"
-                        [value]="userProfile.email" />
-                </mat-form-field>
-            </form>
-        </mat-card-content>
-    </mat-card>
-</section>
+</mat-card>
+
+
+<app-spinner></app-spinner>

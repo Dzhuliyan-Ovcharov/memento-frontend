@@ -9,5 +9,5 @@ export enum apiUrls {
     estates = "/api/v1/estates",
     floors = "/api/v1/floors",
     adTypes = "/api/v1/ad-types",
-    estateTypes = "/v1/estate-types"
+    estateTypes = "/api/v1/estate-types"
 };

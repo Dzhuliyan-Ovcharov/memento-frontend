@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { UserService } from 'src/app/core/services/user.service';
+import { User } from 'src/app/data/models/user.model';
 import { JwtHelperService } from 'src/app/core/services/jwt-helper.service';
-import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -9,32 +12,31 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  firstName: string;
-  lastName: string;
+  user: User;
 
   constructor(
-    private jwtHelperService: JwtHelperService,
-    private router: Router) { }
+    private authService: AuthService,
+    private userService: UserService,
+    private jwtHelperService: JwtHelperService) { }
 
   ngOnInit(): void {
-    this.setCurrentUser();
+    if (this.jwtHelperService.isTokenValid()) {
+      this.userService.fillCurrentUserFromToken();
+    }
+    
+    this.userService.getCurrentUser()
+      .subscribe(user => this.user = user);
   }
 
   isLoggedIn(): boolean {
-    return this.jwtHelperService.isAuthenticated();
+    return this.authService.isAuthenticated();
   }
 
   isAdmin(): boolean {
-    return this.jwtHelperService.isAdmin();
+    return this.userService.isAdmin();
   }
 
   logout(): void {
-    localStorage.clear();
-    this.router.navigateByUrl('/home');
-  }
-
-  private setCurrentUser(): void {
-    this.firstName = this.jwtHelperService.getFirstName();
-    this.lastName = this.jwtHelperService.getLastName();
+    this.authService.logout();
   }
 }

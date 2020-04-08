@@ -8,6 +8,7 @@ import { EmailVerificationComponent } from './pages/login/email-verification/ema
 import { EmailVerificationResolver } from './data/services/email.verification.resolver';
 import { RoleResolver } from './data/services/role.resolver';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { AuthenticatedGuard } from './core/guards/authenticated.guard';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AuthenticatedGuard]
   },
   {
     path: 'email-verification',

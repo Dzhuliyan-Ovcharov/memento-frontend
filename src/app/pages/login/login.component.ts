@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/data/models/user.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const user: User = this.loginForm.value;
     this.subscription = this.authService.login(user)
       .subscribe((data: any) => {
-        this.authService.fillLocalData(data.token);
+        this.authService.fillData(data.token);
         this.router.navigateByUrl('/home');
       });
   }

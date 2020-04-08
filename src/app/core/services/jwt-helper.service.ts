@@ -10,35 +10,36 @@ export class JwtHelperService {
         return localStorage.getItem('token');
     }
 
-    getFirstName(): string {
+    setToken(token: string): void {
+        localStorage.setItem('token', token);
+    }
+
+    clearToken(): void {
+        localStorage.clear();
+    }
+
+    getDataFromToken(value: string): any {
         const token: any = jwt_decode(this.getToken());
-        return token.firstName;
+        return token[value];
     }
 
-    getLastName(): string {
-        const token: any = jwt_decode(this.getToken());
-        return token.lastName;
-    }
-
-    getEmail(): string {
-        const token: any = jwt_decode(this.getToken());
-        return token.sub;
-    }
-
-    isAuthenticated(): boolean {
-        return this.isTokenExists(this.getToken());
-    }
-
-    isAdmin(): boolean {
-        if (this.isTokenExists(this.getToken())) {
-            const token: any = jwt_decode(this.getToken());
-            return token.scopes === 'ADMIN';
+    isTokenValid(): boolean {
+        const token: any = this.getToken();
+        if (token == null) {
+            return false;
         }
 
-        return false;
+        const date = this.getTokenExpirationDate();
+        return date.valueOf() > new Date().valueOf();
     }
 
-    private isTokenExists(token: string): boolean {
-        return token != null;
-    }
+    private getTokenExpirationDate(): Date {
+        const exp = this.getDataFromToken('exp')
+    
+        if (exp === undefined) return null;
+    
+        const date = new Date(0); 
+        date.setUTCSeconds(exp);
+        return date;
+      }
 }

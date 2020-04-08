@@ -30,7 +30,7 @@
                     </mat-form-field>
 
                     <mat-form-field>
-                        <input type="tel" formControlName="phoneNumber" matInput placeholder="Номер на брокер">
+                        <input type="tel" formControlName="phoneNumber" matInput placeholder="Телефон на брокер">
                         <mat-icon matSuffix>smartphone</mat-icon>
                         <mat-error *ngFor="let error of stepOneRegisterForm.controls.phoneNumber.errors | error">
                             {{ error }}

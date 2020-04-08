@@ -32,8 +32,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.roles = this.activatedRoute.snapshot.data.roles;
-    const selectedValue: string = this.roles[0];
 
     this.stepOneRegisterForm = this.fb.group({
       firstName: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
@@ -48,18 +46,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
       password: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(20)])],
       confirmPassword: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(20)])]
     });
-
-    console.log(this.stepOneRegisterForm.value);
   }
 
   register(): void {
 
     const userRegister: UserRegister = this.getUserRegister();
 
-    this.spinner.show();
     this.subscription = this.authService.register(userRegister)
       .subscribe(() => {
-        this.spinner.hide();
         const dialogRef = this.dialog.open(RegisterInformativeDialogComponent, {
           data: {
             email: userRegister.email

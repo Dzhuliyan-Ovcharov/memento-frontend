@@ -5,9 +5,9 @@ export interface User {
     firstName: string;
     lastName: string;
     email: string;
-    phoneNumber: number;
-    agencyName: string;
-    agencyPhoneNumber: number;
-    role: Role;
+    phoneNumber?: number;
+    agencyName?: string;
+    agencyPhoneNumber?: number;
+    role?: Role;
     password?: string;
 }
