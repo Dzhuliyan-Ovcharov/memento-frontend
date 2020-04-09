@@ -26,7 +26,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           }
 
           this.snackBar.open(errorMessage, "Потвърди", {
-            verticalPosition: 'top',
+            verticalPosition: 'bottom',
             horizontalPosition: 'end',
             panelClass: 'snack-error'
           });

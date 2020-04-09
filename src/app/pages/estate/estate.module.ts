@@ -5,7 +5,7 @@ import { EstateListComponent } from './estate-list/estate-list.component';
 import { EstateDetailsComponent } from './estate-list/estate-single/estate-details/estate-details.component';
 import { EstateSingleComponent } from './estate-list/estate-single/estate-single.component';
 import { EstateRoutingModule } from './estate-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
@@ -19,7 +19,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     EstateRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class EstateModule { }

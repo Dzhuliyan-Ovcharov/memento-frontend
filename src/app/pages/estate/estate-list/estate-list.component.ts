@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Estate } from 'src/app/data/models/estate.model';
+import { EstateService } from 'src/app/data/services/estate.service';
 
 @Component({
   selector: 'app-estate-list',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EstateListComponent implements OnInit {
 
-  constructor() { }
+  estates$: Observable<Estate[]>;
+
+  constructor(private estateService: EstateService) { }
 
   ngOnInit(): void {
+    this.estates$ = this.estateService.getAll();
   }
 
 }

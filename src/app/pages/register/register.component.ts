@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserRegister } from 'src/app/data/models/user-register.model';
@@ -26,9 +25,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog,
-    private spinner: NgxSpinnerService
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {

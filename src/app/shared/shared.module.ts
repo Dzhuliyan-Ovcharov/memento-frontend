@@ -13,7 +13,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MaterialModule } from './modules/material.module';
 import { ErrorPipe } from './pipes/error.pipe';
 import { SortByPipe } from './pipes/sort-by.pipe';
-
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -22,13 +23,15 @@ import { SortByPipe } from './pipes/sort-by.pipe';
     ErrorPipe,
     SortByPipe,
     FooterComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    FileUploadComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FileUploadModule
   ],
   exports: [
     HeaderComponent,
@@ -39,7 +42,8 @@ import { SortByPipe } from './pipes/sort-by.pipe';
     SortByPipe,
     FooterComponent,
     NgxSpinnerModule,
-    SpinnerComponent
+    SpinnerComponent,
+    FileUploadComponent
   ],
   providers: [
     AuthService,

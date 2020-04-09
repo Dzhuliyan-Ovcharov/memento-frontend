@@ -5,15 +5,13 @@
                 <li>
                     <a mat-button routerLink="/home">Начало</a>
                 </li>
-                <li>
-                    <a mat-button routerLink="/estates">Имоти</a>
-                </li>
-
-
                 <div *ngIf="isLoggedIn(); then logged else notLogged" class="navigation--authentication__container">
                 </div>
 
                 <ng-template #notLogged>
+                    <li>
+                        <a mat-button routerLink="/estates">Имоти</a>
+                    </li>
                     <li>
                         <a mat-button routerLink="/login">Влез</a>
                     </li>
@@ -22,15 +20,22 @@
                     </li>
                 </ng-template>
 
-                
+
                 <ng-template #logged>
                     <div class="primary-nav">
+                        <button mat-button [matMenuTriggerFor]="estates">Имоти</button>
+                        <mat-menu #estates="matMenu">
+                            <a mat-menu-item routerLink="/estates">Всички</a>
+                            <a mat-menu-item >Мойте имоти</a>
+                            <a mat-menu-item routerLink="/estates/create">Добави</a>
+                        </mat-menu>
+
                         <button mat-button [matMenuTriggerFor]="menu">
                             <mat-icon aria-hidden="false" aria-label="Avatar icon">
                                 account_circle
                             </mat-icon>
                             <span class="primary-nav__user-name">
-                               {{ user.firstName }} {{ user.lastName }}
+                                {{ user.firstName }} {{ user.lastName }}
                             </span>
                         </button>
                         <mat-menu #menu="matMenu">

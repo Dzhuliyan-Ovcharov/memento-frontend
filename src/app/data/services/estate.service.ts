@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { EstateCreate } from '../models/estate-create.model'
+import { Estate } from '../models/estate.model'
 import { apiUrls } from 'src/app/shared/constants';
 import { Observable } from 'rxjs';
 
@@ -11,7 +11,11 @@ export class EstateService {
 
   constructor(private http: HttpClient) { }
 
-  create(estateCreate: EstateCreate): Observable<EstateCreate> {
-    return this.http.post<EstateCreate>(apiUrls.estates, estateCreate);
+  create(estate: Estate): Observable<Estate> {
+    return this.http.post<Estate>(apiUrls.estates, estate);
+  }
+
+  getAll(): Observable<Estate[]> {
+    return this.http.get<Estate[]>(`${apiUrls.estates}`);
   }
 }
