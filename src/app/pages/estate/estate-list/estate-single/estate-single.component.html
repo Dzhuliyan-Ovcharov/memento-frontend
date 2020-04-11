@@ -1,0 +1,31 @@
+<div class="estate-single">
+  <mat-card class="estate-single__card">
+    <mat-card-header>
+      <mat-card-title class="estate-single__title">{{ estate.adType }} - {{ estate.estateType }}</mat-card-title>
+    </mat-card-header>
+
+    <div class="estate-signle-wrapper" *ngIf="estate.images.length >= 1; else defaultImage">
+      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+        <div ngxSlickItem *ngFor="let image of estate.images | slice:0:4" class="slide">
+          <div class="estate-single__image" [ngStyle]="{'background-image': 'url(' + defaultImgUrl + image + ')'}">
+  
+          </div>
+         
+        </div>
+      </ngx-slick-carousel>
+    </div>
+    
+    <ng-template #defaultImage>
+      <div class="estate-single__image" [ngStyle]="{'background-image': 'url(' + defaultImgUrl + 'nophoto.png' + ')'}">
+
+      </div>
+    </ng-template>
+
+    <mat-card-content class="estate-single__price">
+      <div class="price">{{ estate.price.amount }} Евро</div>
+    </mat-card-content>
+    <mat-card-actions class="estate-single__buttons">
+      <a mat-raised-button class="details" color="primary" [routerLink]="['/estates', estate.id]">Детайли</a>
+    </mat-card-actions>
+  </mat-card>
+</div>

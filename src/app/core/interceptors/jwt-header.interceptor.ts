@@ -14,17 +14,10 @@ export class JwtHeaderInterceptor implements HttpInterceptor {
   constructor(private jwtHelperService: JwtHelperService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.contentType = 'application/json';
-
-    if (request.url === apiUrls.estates && request.method === 'POST') {
-      this.contentType = undefined;
-    }
-    
     const token: string = this.jwtHelperService.getToken();
     const jsonRequest: HttpRequest<any> = request.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`,
-        //'Content-Type': this.contentType,
         'Access-Control-Allow-Origin': '*'
       }
     })

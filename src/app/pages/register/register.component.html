@@ -62,24 +62,28 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field>
+                    <mat-form-field formGroupName="passwordGroup">
                         <input [type]="hidePassword ? 'password' : 'text'" matInput formControlName='password'
                             placeholder="Парола">
                         <mat-icon matSuffix (click)="hidePassword = !hidePassword">
                             {{hidePassword ? 'visibility_off' : 'visibility'}}
                         </mat-icon>
-                        <mat-error *ngFor="let error of stepTwoRegisterForm.controls.password.errors | error">
+                        <mat-error *ngFor="let error of stepTwoRegisterForm.controls.passwordGroup.get('password').errors | error">
                             {{ error }}
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field>
+                    <mat-form-field formGroupName="passwordGroup">
                         <input [type]="hideConfirmPassword ? 'password' : 'text'" matInput
-                            formControlName='confirmPassword' placeholder="Повторна парола">
+                            formControlName='confirmPassword' placeholder="Повторна парола" [errorStateMatcher]="matcher">
                         <mat-icon matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">
                             {{hideConfirmPassword ? 'visibility_off' : 'visibility'}}
                         </mat-icon>
-                        <mat-error *ngFor="let error of stepTwoRegisterForm.controls.confirmPassword.errors | error">
+                        <mat-error *ngIf="stepTwoRegisterForm.controls.passwordGroup.hasError('notSame')">
+                            Паролите не съвпадат.
+                        </mat-error>  
+
+                        <mat-error *ngFor="let error of stepTwoRegisterForm.controls.passwordGroup.get('confirmPassword').errors | error">
                             {{ error }}
                         </mat-error>
                     </mat-form-field>

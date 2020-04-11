@@ -1,35 +1,27 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarHelperService } from '../services/snack-bar-helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpErrorInterceptor implements HttpInterceptor {
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBarHelperService: SnackBarHelperService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           let errorMessage = '';
-          console.log(error);
-          if (error.error instanceof ErrorEvent) {
-            // client error
-            errorMessage = `Грешка: ${error.error}`;
-          } else {
-            // server error
-            errorMessage = `Грешка статус: ${error.status}\n Съобщение: ${error.error}`;
-          }
 
-          this.snackBar.open(errorMessage, "Потвърди", {
-            verticalPosition: 'bottom',
-            horizontalPosition: 'end',
-            panelClass: 'snack-error'
-          });
+          error.error instanceof ErrorEvent ?
+            errorMessage = `Грешка: ${error.error}` :
+            errorMessage = `${error.error}`;
+
+          this.snackBarHelperService.showDefaultError(errorMessage, 'Потвърди');
 
           console.log(errorMessage);
           return throwError(errorMessage);

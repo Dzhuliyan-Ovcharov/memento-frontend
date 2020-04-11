@@ -9,13 +9,11 @@ import { apiUrls } from 'src/app/shared/constants';
 })
 export class ImageService {
 
-    statuses: string[] = [];
 
     constructor(private http: HttpClient) { }
 
-    save(image: any, estateId: number): Observable<string> {
-        console.log(image);
-        return this.http.post<any>(`${apiUrls.images}/estate/${estateId}`, image)
+    save(images: FormData, estateId: number): Observable<any> {
+        return this.http.post<any>(`${apiUrls.images}/all/estate/${estateId}`, images)
     }
 
 }

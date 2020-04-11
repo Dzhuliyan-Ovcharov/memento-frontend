@@ -63,3 +63,12 @@ main {
     }
   }
 }
+
+// Slick Slider global styling
+.slick-slider {
+  width: 400px;
+
+  &.slick-dotted.slick-slider {
+    margin-bottom: 0;
+  }
+}

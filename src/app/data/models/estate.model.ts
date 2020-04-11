@@ -11,4 +11,5 @@ export interface Estate {
     features: string[];
     adType: string;
     email?: string;
+    images?: string[];
 }

@@ -21,7 +21,7 @@ export class AuthService {
   ) { }
 
   login(user: User): Observable<User> {
-    return this.http.post<User>(apiUrls.authenticate, user);
+    return this.http.post<User>(`${apiUrls.users}/authenticate`, user);
   }
 
   logout(): void {

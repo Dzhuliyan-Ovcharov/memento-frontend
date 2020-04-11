@@ -7,6 +7,7 @@ import { EstateSingleComponent } from './estate-list/estate-single/estate-single
 import { EstateRoutingModule } from './estate-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     EstateRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    SlickCarouselModule
   ]
 })
 export class EstateModule { }

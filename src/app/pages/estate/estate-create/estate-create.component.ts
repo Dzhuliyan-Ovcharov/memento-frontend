@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EstateService } from 'src/app/data/services/estate.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Floor } from 'src/app/data/models/floor.model';
-import { EstateType } from 'src/app/data/models/estate-type.model';
-import { AdType } from 'src/app/data/models/ad-type.model';
-import { Estate } from 'src/app/data/models/estate.model';
+import { SnackBarHelperService } from 'src/app/core/services/snack-bar-helper.service';
 import { UserService } from 'src/app/core/services/user.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdType } from 'src/app/data/models/ad-type.model';
 import { EstateFeature } from 'src/app/data/models/estate-feature.model';
+import { EstateType } from 'src/app/data/models/estate-type.model';
+import { Estate } from 'src/app/data/models/estate.model';
+import { Floor } from 'src/app/data/models/floor.model';
+import { EstateService } from 'src/app/data/services/estate.service';
 import { ImageService } from 'src/app/data/services/image.service';
 
 @Component({
@@ -32,9 +32,9 @@ export class EstateCreateComponent implements OnInit {
     private estateService: EstateService,
     private userService: UserService,
     private imageService: ImageService,
+    private snackBarHelperService: SnackBarHelperService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -69,7 +69,7 @@ export class EstateCreateComponent implements OnInit {
 
     const estate: Estate = {
       price: {
-        currency: 'BGN',
+        currency: 'EUR',
         amount: this.estateForm.value.price
       },
       quadrature: {
@@ -84,31 +84,22 @@ export class EstateCreateComponent implements OnInit {
       email: this.email
     };
 
-    console.log(estate);
     this.estateService.create(estate).subscribe(estate => {
-      this.snackBar.open("Успешно добавен имот.", "", {
-        duration: 2000,
-        verticalPosition: 'bottom',
-        horizontalPosition: 'end',
-        panelClass: 'snack-success'
-      });
+      this.snackBarHelperService.showDefaultSuccess("Успешно добавен имот.", 'Потвърди');
 
       if (this.files.length) {
         let imageData = new FormData();
-        for (let i = 0; i < this.files.length; i++)
-          imageData.set('file', this.files[i].rawFile);
-          console.log(imageData);
-          this.imageService.save(imageData, estate.id).subscribe(() => {
-            this.snackBar.open("Успешно добавена снимка.", "", {
-              duration: 2000,
-              verticalPosition: 'bottom',
-              horizontalPosition: 'end',
-              panelClass: 'snack-success'
-            });
-          });
-      }
 
-      this.router.navigateByUrl('/estates')
+        this.files.forEach(file => {
+          imageData.append('files', file.rawFile);
+        });
+
+        this.imageService.save(imageData, estate.id).subscribe(data => {
+          this.snackBarHelperService.showDefaultSuccess('Успешно добавени снимки', 'Потвърди')
+        });
+      }
+      
+      this.router.navigateByUrl('/estates');
     });
   }
 

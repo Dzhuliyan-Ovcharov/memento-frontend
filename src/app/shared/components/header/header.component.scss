@@ -2,9 +2,18 @@
     ul {
         display: flex;
 
+
         li {
             list-style-type: none;
         }
+        
+ 
+    }
+            
+    &__login-register {
+        display: flex;
+        position: absolute;
+        right: 5rem;
     }
 }
 
@@ -15,11 +24,17 @@
 
 .mat-toolbar.mat-primary {
     display: flex;
-
+    
     .primary-nav {
+        &__account {
+            position: absolute;
+            right: 5rem;
+        }
+                    
         &__user-name {
             margin-left: 5px;
             font-weight: 400;
         }
     }
 }
+

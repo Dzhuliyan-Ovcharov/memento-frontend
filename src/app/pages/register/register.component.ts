@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserRegister } from 'src/app/data/models/user-register.model';
 import { RegisterInformativeDialogComponent } from './register-informative-dialog/register-informative-dialog.component';
+import { MyErrorStateMatcher } from 'src/app/shared/validators/password-matcher.validator';
 
 @Component({
   selector: 'app-register',
@@ -20,6 +21,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   stepTwoRegisterForm: FormGroup;
   subscription: Subscription;
   roles: string[];
+  matcher = new MyErrorStateMatcher();
 
   constructor(
     private fb: FormBuilder,
@@ -40,9 +42,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.stepTwoRegisterForm = this.fb.group({
       agencyPhoneNumber: ['', Validators.compose([Validators.required, Validators.pattern(/^(\+)?(359|0)8[789]\d{1}(|-| )\d{3}(|-| )\d{3}/)])],
       agencyName: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(20)])],
-      confirmPassword: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(20)])]
+      passwordGroup: this.fb.group({
+        password: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(20)])],
+        confirmPassword: ['']
+      }, {validator: this.checkPasswords })
     });
+
+    console.log(this.stepTwoRegisterForm);
   }
 
   register(): void {
@@ -82,4 +88,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     return userRegister;
   }
+
+  private checkPasswords(group: FormGroup) {
+    let pass = group.get('password').value;
+    let confirmPassword = group.get('confirmPassword').value;
+
+    return pass === confirmPassword ? null : { notSame: true }
+  }
+
 }

@@ -6,7 +6,6 @@ const validationMsgs: any = {
   min: data => `Стойността може да е най-малко ${data.min}`,
   max: data => `Стойността може да е най-много ${data.max}`,
   pattern: data => 'Моля добавете валиден телефонен номер.',
-  matchObj: data => `${data.message}`,
   minlength: data => `Моля добавете най-малко ${data.requiredLength} символа.`,
   maxlength: data => `Максималната дължина е ${data.requiredLength} символа.`
 };

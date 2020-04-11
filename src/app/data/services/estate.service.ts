@@ -11,11 +11,15 @@ export class EstateService {
 
   constructor(private http: HttpClient) { }
 
+  findById(estateId: number): Observable<Estate> {
+    return this.http.get<Estate>(`${apiUrls.estates}/${estateId}`);
+  }
+
   create(estate: Estate): Observable<Estate> {
     return this.http.post<Estate>(apiUrls.estates, estate);
   }
 
   getAll(): Observable<Estate[]> {
-    return this.http.get<Estate[]>(`${apiUrls.estates}`);
+    return this.http.get<Estate[]>(apiUrls.estates);
   }
 }

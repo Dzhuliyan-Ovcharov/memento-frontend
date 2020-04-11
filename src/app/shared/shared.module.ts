@@ -15,6 +15,7 @@ import { ErrorPipe } from './pipes/error.pipe';
 import { SortByPipe } from './pipes/sort-by.pipe';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { SnackBarHelperService } from '../core/services/snack-bar-helper.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     AuthService,
     JwtHelperService,
     RoleService,
-    EmailVerificationService
+    EmailVerificationService,
+    SnackBarHelperService
   ]
 })
 export class SharedModule { }

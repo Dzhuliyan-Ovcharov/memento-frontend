@@ -2,7 +2,6 @@ export const baseUrl: string = 'http://localhost:8081';
 
 export enum apiUrls {
     home = "/api/home",
-    authenticate = "/api/v1/users/authenticate",
     users = "/api/v1/users",
     roles = "/api/v1/roles",
     emailverification = "/api/v1/email-verification",
@@ -13,3 +12,5 @@ export enum apiUrls {
     estateFeatures = "/api/v1/estate-features",
     images = '/api/v1/images'
 };
+
+export const defaultImgUrl = 'http://127.0.0.1:8887/';
