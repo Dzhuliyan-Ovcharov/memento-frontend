@@ -1,0 +1,32 @@
+<div class="ad-latest">
+    <div class="ad__aside">
+        <div *ngIf="estate.images.length > 0; else noPhoto"
+            [style.background-image]="'url(' + defaultImgUrl + estate.images[0] + ')'" class="ad__image">
+        </div>
+        <ng-template #noPhoto>
+            <div [style.background-image]="'url(' + defaultImgUrl + 'nophoto.png' + ')'" class="ad__image"></div>
+        </ng-template>
+    </div>
+
+    <div class="ad__content">
+        <h3 class="ad__title">
+            {{ estate.adType }} - {{ estate.estateType }}
+        </h3>
+
+        <div class="ad__entry">
+            <strong class="ad__price">
+                {{ estate.price.amount }} Евро
+            </strong>
+
+            <p>
+                {{ estate.quadrature.pureArea }} кв.м
+            </p>
+        </div>
+
+        <div class="ad__actions">
+            <button [routerLink]="['/estates', estate.id]" color="primary" mat-button>
+                Виж повече
+            </button>
+        </div>
+    </div>
+</div>

@@ -19,7 +19,19 @@ export class EstateService {
     return this.http.post<Estate>(apiUrls.estates, estate);
   }
 
+  update(id: number, estate: Estate): Observable<Estate> {
+    return this.http.put<Estate>(`${apiUrls.estates}/${id}`, estate);
+  }
+
   getAll(): Observable<Estate[]> {
     return this.http.get<Estate[]>(apiUrls.estates);
+  }
+
+  getLatest(count: number): Observable<Estate[]> {
+    return this.http.get<Estate[]>(`${apiUrls.estates}/latest/${count}`);
+  }
+
+  getAllByEmail(email: string): Observable<Estate[]> {
+    return this.http.get<Estate[]>(`${apiUrls.estates}/email/${email}`);
   }
 }

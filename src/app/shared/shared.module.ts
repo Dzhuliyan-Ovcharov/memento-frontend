@@ -16,6 +16,8 @@ import { SortByPipe } from './pipes/sort-by.pipe';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { SnackBarHelperService } from '../core/services/snack-bar-helper.service';
+import 'hammerjs';
+import { DialogDeleteComponent } from './components/dialog/dialog-delete/dialog-delete.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { SnackBarHelperService } from '../core/services/snack-bar-helper.service
     SortByPipe,
     FooterComponent,
     SpinnerComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    DialogDeleteComponent
   ],
   imports: [
     CommonModule,

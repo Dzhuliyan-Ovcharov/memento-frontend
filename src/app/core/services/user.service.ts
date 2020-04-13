@@ -30,6 +30,10 @@ export class UserService {
     return this.currentUser$;
   }
 
+  clearCurrentUserBehaviourSubject(): void {
+    this.currentUser.next(null);
+  }
+
   fillCurrentUserFromToken(): void {
     const user: User = {
       firstName: this.getFirstName(),

@@ -1,0 +1,8 @@
+<div class="container">
+    <h3 mat-dialog-title>Сигурни ли сте, че искате да изтриете записа?</h3>
+
+    <mat-dialog-actions>
+        <button mat-raised-button color="warn" [mat-dialog-close]="1">Изтрий</button>
+        <button mat-raised-button color="primary" (click)="onNoClick()" tabindex="-1">Отказ</button>
+    </mat-dialog-actions>
+</div>

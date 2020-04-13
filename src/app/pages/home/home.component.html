@@ -1,0 +1,29 @@
+
+<section class="section-home">
+    <div class="container">
+        <div class="section__body">
+            <ngx-slick-carousel class="home-slider carousel" #slickModal="slick-carousel" [config]="slideConfig">
+                <div ngxSlickItem *ngFor="let image of imagePaths" class="slide">
+                    <div [style.background-image]="'url(' + image +')'" class="slider__image">
+                    </div>
+                </div>
+            </ngx-slick-carousel>
+        </div>
+    </div>
+</section>
+
+<section class="section-latest-ads">
+    <div class="container-section">
+        <div class="section__head">
+            <h2>
+                Най-новите обяви за имоти
+            </h2>
+        </div>
+
+        <div class="section__body">
+            <div class="ad-latestes-list__single" *ngFor="let estate of (estates$ | async | slice:0:4)">
+                <app-latest-ads [estate]="estate" ></app-latest-ads>
+            </div>
+        </div>
+    </div>
+</section>

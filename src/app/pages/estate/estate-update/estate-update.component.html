@@ -1,15 +1,21 @@
-<form [formGroup]="estateForm" (ngSubmit)="onSubmit()">
-    <div class="estate-create">
+<form [formGroup]="estateForm" (ngSubmit)="onUpdate()">
+    <div class="estate-update">
+        <div class="estate-update__content-left">
+            <ngx-gallery *ngIf="estate.images.length > 0; else noImages" [options]="galleryOptions" [images]="galleryImages">
+            </ngx-gallery>
 
-        <div class="estate-create__file-upload">
-            <div class="estate-create__field">
-                <app-file-upload (files)="onFileUpload($event)" (isFilesDeleted)="onDeleteFiles()">
-                </app-file-upload>
+            <ng-template #noImages>Няма качени снимки.</ng-template>
+
+            <div class="estate-update__file-upload">
+                <div class="estate-update__field">
+                    <app-file-upload (files)="onFileUpload($event)" (isFilesDeleted)="onDeleteFiles()">
+                    </app-file-upload>
+                </div>
             </div>
         </div>
 
-        <div class="estate-create__estate-data">
-            <div class="estate-create__field">
+        <div class="estate-update__estate-data">
+            <div class="estate-update__field">
                 <mat-form-field>
                     <mat-label>Вид на имота</mat-label>
                     <mat-select formControlName='estateType'>
@@ -25,7 +31,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="estate-create__field">
+            <div class="estate-update__field">
                 <mat-form-field>
                     <mat-label>Етаж</mat-label>
                     <mat-select formControlName='floor'>
@@ -40,7 +46,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="estate-create__field">
+            <div class="estate-update__field">
                 <mat-form-field>
                     <mat-label>Вид на обява</mat-label>
                     <mat-select formControlName='adType'>
@@ -56,7 +62,7 @@
             </div>
 
 
-            <div class="estate-create__field">
+            <div class="estate-update__field">
                 <mat-form-field>
                     <input type="number" formControlName="builtUpArea" matInput placeholder="Квадрати">
 
@@ -68,7 +74,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="estate-create__field">
+            <div class="estate-update__field">
                 <mat-form-field>
                     <input type="number" formControlName="pureArea" matInput placeholder="Чисти квадрати">
 
@@ -80,7 +86,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="estate-create__field">
+            <div class="estate-update__field">
                 <mat-form-field>
                     <input type="number" formControlName="price" matInput placeholder="Цена">
 
@@ -93,7 +99,7 @@
             </div>
 
 
-            <div class="estate-create__field description">
+            <div class="estate-update__field description">
                 <mat-form-field>
                     <textarea matInput formControlName="description" placeholder="Описание на имота"></textarea>
 
@@ -103,7 +109,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="estate-create__field features">
+            <div class="estate-update__field features">
                 <mat-label class="features-label">Особености</mat-label>
                 <div class="feature-checkbox" *ngFor="let estateFeature of estateFeatures">
                     <mat-checkbox [(ngModel)]="estateFeature.isChecked" [ngModelOptions]="{standalone: true}">
@@ -115,6 +121,6 @@
     </div>
 
     <div class="actions">
-        <button type="submit" [disabled]="estateForm.invalid" mat-raised-button color="primary">Потвърди</button>
+        <button type="submit" [disabled]="estateForm.invalid" mat-raised-button color="primary">Редактирай</button>
     </div>
 </form>

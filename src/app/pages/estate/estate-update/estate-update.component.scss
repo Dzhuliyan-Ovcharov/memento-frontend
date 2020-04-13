@@ -1,0 +1,97 @@
+.estate-update {
+    &__content {
+        display: flex;
+
+        &-left {
+            display: flex;
+            flex: 1 0 40%;
+            flex-direction: column;
+            align-items: flex-end;
+            padding-right: 5rem;
+        }
+    }
+
+    &__file-upload {
+        margin-right: 15rem;
+    }
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin: 2rem;
+
+    &__estate-data {
+        display: flex;
+        flex-wrap: wrap;
+
+        .estate-update__field {
+            flex: 1;
+            margin: 1rem;
+
+            &.features {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                flex-basis: 100%;
+                position: relative;
+                margin-top: 2em;
+
+                .feature-checkbox {
+                    width: 30%;
+                }
+
+                .features-label {
+                    position: absolute;
+                    top: -2rem;
+                    left: 0;
+                }
+            }
+        }
+
+        .description {
+            flex: 2 0 0;
+            margin-top: 0;
+            > mat-form-field {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.estate-image {
+    display: flex;
+    margin: 0.5rem;
+    position: relative;
+
+    img {
+        width: auto;
+        max-height: 200px;
+    }
+
+    .image-delete {
+        position: absolute;
+        top: 0.5rem;
+        right: 0;
+        background: no-repeat;
+        border: 0;
+        cursor: pointer;
+        text-shadow: 1px 1px 4px #000;
+
+        .icon {
+            color: red;
+        }
+    }
+}
+
+.actions {
+    margin: 2rem;
+    text-align: center;
+}
+
+.delete-estate-button {
+    color: red;
+}
+
+.ngx-gallery-icon-content {
+    color: red;
+}

@@ -8,12 +8,14 @@ import { apiUrls } from 'src/app/shared/constants';
     providedIn: 'root'
 })
 export class ImageService {
-
-
     constructor(private http: HttpClient) { }
 
     save(images: FormData, estateId: number): Observable<any> {
         return this.http.post<any>(`${apiUrls.images}/all/estate/${estateId}`, images)
+    }
+
+    delete(image: string): Observable<any> {
+        return this.http.delete<any>(`${apiUrls.images}/name/${image}`);
     }
 
 }

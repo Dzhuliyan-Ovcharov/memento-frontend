@@ -81,17 +81,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
       phoneNumber: this.stepOneRegisterForm.value.phoneNumber,
       agencyName: this.stepTwoRegisterForm.value.agencyName,
       agencyPhoneNumber: this.stepTwoRegisterForm.value.agencyPhoneNumber,
-      password: this.stepTwoRegisterForm.value.password,
-      confirmPassword: this.stepTwoRegisterForm.value.confirmPassword,
+      password: this.stepTwoRegisterForm.controls.passwordGroup.value.password,
+      confirmPassword: this.stepTwoRegisterForm.controls.passwordGroup.value.confirmPassword,
       permission: 'AGENCY'
     };
 
     return userRegister;
   }
 
-  private checkPasswords(group: FormGroup) {
-    let pass = group.get('password').value;
-    let confirmPassword = group.get('confirmPassword').value;
+  private checkPasswords(passwordGroup: FormGroup) {
+    let pass = passwordGroup.value.password;
+    let confirmPassword = passwordGroup.value.confirmPassword;
 
     return pass === confirmPassword ? null : { notSame: true }
   }

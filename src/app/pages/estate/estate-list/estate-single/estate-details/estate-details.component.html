@@ -1,1 +1,77 @@
-<p>estate-details works!</p>
+<div class="estate-details" *ngIf="(userProfile$ | async) as userProfile">
+  <div class="estate-details__title">
+    <div class="estate-title">
+      {{ estate.adType }} {{ estate.estateType }}
+    </div>
+  </div>
+
+  <div class="estate-details__content">
+    <div class="estate-details__content-left">
+      <ngx-gallery [options]="galleryOptions" [images]="galleryImages">
+      </ngx-gallery>
+      <div class="user-details">
+        <mat-label class="title">Информация</mat-label>
+
+        <div class="details">
+          <div class="user-email field">
+            <mat-label class="field-title">Име: </mat-label>{{ userProfile.firstName }} {{ userProfile.lastName }}
+          </div>
+
+          <div class="user-email field">
+            <mat-label class="field-title">Имейл: </mat-label>{{ userProfile.email }}
+          </div>
+
+          <div class="user-email field">
+            <mat-label class="field-title">Телефон: </mat-label>{{ userProfile.phoneNumber }}
+          </div>
+
+          <div class="user-email field">
+            <mat-label class="field-title">Агенция: </mat-label>{{ userProfile.agencyName }}
+          </div>
+
+          <div class="user-email field">
+            <mat-label class="field-title">Номер на агенцията: </mat-label>{{ userProfile.agencyPhoneNumber }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="estate-details__content-right">
+      <div class="price field">
+        <mat-label class="field-title">Цена: </mat-label>{{ estate.price.amount }} EUR
+      </div>
+
+      <div class="actions">
+        <a class="action-btn" mat-raised-button color="primary" href="mailto:{{ userProfile.email }}">Изпрати имейл</a>
+        <a class="action-btn" mat-raised-button color="warn" href="tel:{{ userProfile.phoneNumber }}">Обади се</a>
+      </div>
+
+      <div class="quadrature field">
+        <mat-label class="field-title">Квадратура: </mat-label>
+        <ul>
+          <li>кв.м: {{estate.quadrature.builtUpArea }}</li>
+          <li>чисти кв.м: {{estate.quadrature.pureArea }}</li>
+        </ul>
+      </div>
+
+      <div class="floor field">
+        <mat-label class="field-title">Етаж: </mat-label>{{ estate.floor }}
+      </div>
+
+      <div class="description field">
+        <mat-label class="field-title">Описание: </mat-label>
+        {{ estate.description }}
+      </div>
+
+      <div class="features field" *ngIf="estate.features.length > 0">
+        <mat-label class="field-title">Допълнителна информация</mat-label>
+        <ul>
+          <li *ngFor="let feature of estate.features">
+            <mat-icon matSuffix class="icon">check</mat-icon>
+            {{ feature }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

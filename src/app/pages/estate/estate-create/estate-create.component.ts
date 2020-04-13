@@ -51,7 +51,7 @@ export class EstateCreateComponent implements OnInit {
       price: ['', Validators.compose([Validators.min(50), Validators.required])],
       builtUpArea: ['', Validators.compose([Validators.min(10), Validators.max(500), Validators.required])],
       pureArea: ['', Validators.compose([Validators.min(10), Validators.max(500), Validators.required])],
-      description: ['', Validators.required],
+      description: ['', Validators.compose([Validators.required, Validators.maxLength(500)])],
       floor: ['', Validators.required],
       estateType: ['', Validators.required],
       adType: ['', Validators.required]
@@ -94,12 +94,15 @@ export class EstateCreateComponent implements OnInit {
           imageData.append('files', file.rawFile);
         });
 
-        this.imageService.save(imageData, estate.id).subscribe(data => {
-          this.snackBarHelperService.showDefaultSuccess('Успешно добавени снимки', 'Потвърди')
-        });
+        this.imageService.save(imageData, estate.id)
+          .subscribe(data => {
+            this.snackBarHelperService.showDefaultSuccess('Успешно добавени снимки', 'Потвърди')
+          }, error => {
+            console.log(error);
+          }, () => this.router.navigateByUrl('/estates'));
+      } else {
+        this.router.navigateByUrl('/estates');
       }
-      
-      this.router.navigateByUrl('/estates');
     });
   }
 

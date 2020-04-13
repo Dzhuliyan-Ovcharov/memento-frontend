@@ -1,9 +1,9 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/data/models/user.model';
 import { UserRegister } from 'src/app/data/models/user-register.model';
+import { User } from 'src/app/data/models/user.model';
 import { apiUrls } from 'src/app/shared/constants';
 import { JwtHelperService } from './jwt-helper.service';
 import { UserService } from './user.service';
@@ -26,6 +26,8 @@ export class AuthService {
 
   logout(): void {
     this.jwtHelperService.clearToken();
+    this.userService.clearCurrentUserBehaviourSubject();
+    
     this.router.navigateByUrl('/home');
   }
 

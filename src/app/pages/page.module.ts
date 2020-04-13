@@ -8,6 +8,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterInformativeDialogComponent } from './register/register-informative-dialog/register-informative-dialog.component';
 import { RegisterComponent } from './register/register.component';
 import { SharedModule } from '../shared/shared.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { LatestAdsComponent } from './home/latest-ads/latest-ads.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +18,15 @@ import { SharedModule } from '../shared/shared.module';
     HomeComponent,
     RegisterInformativeDialogComponent,
     EmailVerificationComponent,
-    ProfileComponent
+    ProfileComponent,
+    LatestAdsComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
-    FormsModule 
+    FormsModule,
+    SlickCarouselModule
   ],
   exports: [
     LoginComponent,

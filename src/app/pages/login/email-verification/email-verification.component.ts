@@ -13,7 +13,7 @@ export class EmailVerificationComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    let any = this.activatedRoute.snapshot.data.isVerified;
+    this.activatedRoute.snapshot.data.isVerified;
     this.isVerified = true;
   }
 }

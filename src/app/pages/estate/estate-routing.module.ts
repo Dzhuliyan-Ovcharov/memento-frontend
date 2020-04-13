@@ -5,10 +5,16 @@ import { EstateCreateResolver } from 'src/app/data/services/estate-create.resolv
 import { EstateCreateComponent } from './estate-create/estate-create.component';
 import { EstateListComponent } from './estate-list/estate-list.component';
 import { EstateDetailsComponent } from './estate-list/estate-single/estate-details/estate-details.component';
+import { EstateUpdateComponent } from './estate-update/estate-update.component';
+import { EstateResolver } from 'src/app/data/services/estate-resolver.resolver';
 
 const routes: Routes = [
     {
         path: '',
+        component: EstateListComponent,
+    },
+    {
+        path: 'mine',
         component: EstateListComponent,
     },
     {
@@ -18,8 +24,15 @@ const routes: Routes = [
         canActivate: [UnauthenticatedGuard]
     },
     {
+        path: 'update/:id',
+        component: EstateUpdateComponent,
+        resolve: { estate: EstateResolver, estateCreateData: EstateCreateResolver },
+        canActivate: [UnauthenticatedGuard]
+    },
+    {
         path: ':id',
-        component: EstateDetailsComponent
+        component: EstateDetailsComponent,
+        resolve: { estate: EstateResolver}
     }
 
 ];

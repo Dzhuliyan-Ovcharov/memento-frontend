@@ -12,5 +12,4 @@ export class UnauthenticatedGuard implements CanActivate {
     canActivate(): boolean {
         return this.authService.isAuthenticated();
     }
-
 }

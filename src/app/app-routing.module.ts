@@ -9,12 +9,13 @@ import { EmailVerificationResolver } from './data/services/email.verification.re
 import { RoleResolver } from './data/services/role.resolver';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthenticatedGuard } from './core/guards/authenticated.guard';
+import { UnauthenticatedGuard } from './core/guards/unauthenticated.guard';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: HomeComponent
+    redirectTo: 'home'
   },
   {
     path: 'home',
@@ -33,11 +34,13 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
-    resolve: { roles: RoleResolver }
+    resolve: { roles: RoleResolver },
+    canActivate: [AuthenticatedGuard]
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [UnauthenticatedGuard]
   },
   {
     path: 'estates',

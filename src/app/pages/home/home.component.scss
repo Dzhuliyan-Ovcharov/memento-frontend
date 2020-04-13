@@ -1,0 +1,50 @@
+.section-home {
+    padding: 2rem 0;
+
+    .home-slider{ 
+        width: 1200px;
+        margin: 0 auto;
+
+        .slider__image {
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 1200px;
+            height: 500px;
+        }
+    }
+}
+
+.section-latest-ads {
+    .container-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        .section__head {
+            text-align: center;
+        }
+    }
+
+    .section__body {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .ad-latestes-list__single {
+        flex: 0 1 50%;
+        max-width: 50%;
+        margin-bottom: 1rem;
+    }
+
+}
+
+::ng-deep.slick-slider {
+    .slick-prev {
+        left: -45px;
+    }
+    .slick-prev:before, 
+    .slick-next:before {
+        color: #000;
+        font-size: 40px;
+    }
+}
