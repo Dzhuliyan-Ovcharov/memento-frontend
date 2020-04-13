@@ -11,6 +11,7 @@ export class LatestAdsComponent implements OnInit {
 
   @Input()
   estate: Estate;
+  
   defaultImgUrl: string = defaultImgUrl;
   
   constructor() { }

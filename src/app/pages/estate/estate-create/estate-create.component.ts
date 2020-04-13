@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SnackBarHelperService } from 'src/app/core/services/snack-bar-helper.service';
@@ -10,15 +10,17 @@ import { Estate } from 'src/app/data/models/estate.model';
 import { Floor } from 'src/app/data/models/floor.model';
 import { EstateService } from 'src/app/data/services/estate.service';
 import { ImageService } from 'src/app/data/services/image.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-estate-create',
   templateUrl: './estate-create.component.html',
   styleUrls: ['./estate-create.component.scss']
 })
-export class EstateCreateComponent implements OnInit {
+export class EstateCreateComponent implements OnInit, OnDestroy {
 
   private email: string;
+  private subscription: Subscription = new Subscription();
 
   estateForm: FormGroup;
   floors: Floor[];
@@ -84,7 +86,7 @@ export class EstateCreateComponent implements OnInit {
       email: this.email
     };
 
-    this.estateService.create(estate).subscribe(estate => {
+    this.subscription.add(this.estateService.create(estate).subscribe(estate => {
       this.snackBarHelperService.showDefaultSuccess("Успешно добавен имот.", 'Потвърди');
 
       if (this.files.length) {
@@ -94,16 +96,16 @@ export class EstateCreateComponent implements OnInit {
           imageData.append('files', file.rawFile);
         });
 
-        this.imageService.save(imageData, estate.id)
+        this.subscription.add(this.imageService.save(imageData, estate.id)
           .subscribe(data => {
             this.snackBarHelperService.showDefaultSuccess('Успешно добавени снимки', 'Потвърди')
           }, error => {
             console.log(error);
-          }, () => this.router.navigateByUrl('/estates'));
+          }, () => this.router.navigateByUrl('/estates')));
       } else {
         this.router.navigateByUrl('/estates');
       }
-    });
+    }));
   }
 
   onFileUpload(files) {
@@ -113,4 +115,9 @@ export class EstateCreateComponent implements OnInit {
   onDeleteFiles() {
     this.files = [];
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }

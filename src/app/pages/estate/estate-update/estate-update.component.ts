@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Estate } from 'src/app/data/models/estate.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -14,15 +14,17 @@ import { NgxGalleryOptions, NgxGalleryImage } from '@kolkov/ngx-gallery';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteComponent } from 'src/app/shared/components/dialog/dialog-delete/dialog-delete.component';
 import { ImageService } from 'src/app/data/services/image.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-estate-update',
   templateUrl: './estate-update.component.html',
   styleUrls: ['./estate-update.component.scss']
 })
-export class EstateUpdateComponent implements OnInit {
+export class EstateUpdateComponent implements OnInit, OnDestroy {
 
   private email: string;
+  private subscription: Subscription = new Subscription();
 
   estate: Estate;
   estateForm: FormGroup;
@@ -103,7 +105,7 @@ export class EstateUpdateComponent implements OnInit {
       email: this.email
     };
 
-    this.estateService.update(estate.id, estate).subscribe(() => {
+    this.subscription.add(this.estateService.update(estate.id, estate).subscribe(() => {
       this.snackBarHelperService.showDefaultSuccess("Успешно редактиран имот.", 'Потвърди');
 
 
@@ -114,16 +116,16 @@ export class EstateUpdateComponent implements OnInit {
           imageData.append('files', file.rawFile);
         });
 
-        this.imageService.save(imageData, estate.id)
+        this.subscription.add(this.imageService.save(imageData, estate.id)
           .subscribe(data => {
             this.snackBarHelperService.showDefaultSuccess('Успешно добавени снимки', 'Потвърди')
           }, error => {
             console.log(error);
-          }, () => this.router.navigateByUrl('/estates'));
+          }, () => this.router.navigateByUrl('/estates')));
       } else {
         this.router.navigateByUrl('/estates');
       }
-    });
+    }));
   }
 
 
@@ -187,17 +189,17 @@ export class EstateUpdateComponent implements OnInit {
 
   removeImage(event: Event, index: number) {
     const dialogRef = this.dialog.open(DialogDeleteComponent);
-    dialogRef.afterClosed().subscribe(result => {
+    this.subscription.add(dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         const imageName: string = this.galleryImages[index].big.toString().substr(defaultImgUrl.length);
-        this.imageService.delete(imageName).subscribe(() => {
+        this.subscription.add(this.imageService.delete(imageName).subscribe(() => {
           this.snackBarHelperService.showDefaultSuccess('Успешно изтрита снимка', 'Потвърди');
-          
+
           this.galleryImages.splice(index, 1);
           console.log(this.galleryImages);
-        })
+        }));
       }
-    });
+    }));
   }
 
   onFileUpload(files) {
@@ -206,5 +208,9 @@ export class EstateUpdateComponent implements OnInit {
 
   onDeleteFiles() {
     this.files = [];
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
